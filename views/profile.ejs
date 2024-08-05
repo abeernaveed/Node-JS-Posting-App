@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="h-screen bg-gray-100 flex justify-center items-center bg-gray-900"
+  >
+    <!-- Profile Page -->
+    <!-- Profile Page -->
+    <div class="bg-gray-900 h-screen w-[80%] p-4">
+      <!-- Log Out Button -->
+
+      <a href="/users/logout"
+        ><button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg float-right"
+        >
+          Log Out
+        </button></a
+      >
+      <!-- Create Post Form -->
+      <form
+        class="flex flex-col justify-center mb-4 w-[30%]"
+        action="/posts"
+        method="POST"
+      >
+        <h1 class="text-white font-bold text-center p-10">Create Post</h1>
+        <input
+          type="text"
+          placeholder="User ID"
+          name="user"
+          class="bg-gray-700 text-gray-200 p-2 w-full mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+          value="<%= user._id %>"
+        />
+        <input
+          type="text"
+          placeholder="What's on your mind?"
+          name="postData"
+          class="bg-gray-700 text-gray-200 p-2 w-full mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+        />
+        <textarea
+          placeholder="Write Details here!"
+          name="content"
+          class="bg-gray-700 text-gray-200 p-2 w-full mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+        ></textarea>
+        <input
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-[50%] my-4"
+          value="Create Post"
+        />
+      </form>
+      <!-- Post Section -->
+      <div class="post-section w-[60%]">
+        <h2 class="text-gray-200 text-2xl mb-4">Your Posts</h2>
+        <% user.posts.reverse().forEach(function(post){ %>
+        <div class="bg-gray-700 p-4 rounded-lg mb-4">
+          <h3 class="text-xl mb-2 font-small text-[#14213d] cursor-pointer">
+            @<%= user.name %>
+          </h3>
+          <p class="text-white mb-4 font-bold"><%= post.postData %></p>
+          <p class="text-gray-200 mb-4"><%= post.content %></p>
+          <small class="pl-2 text-white"><%= post.likes.length %> Like</small>
+          <div class="flex justify-between">
+            <a
+              class="bg-[#7b2cbf] font-bold py-2 px-4 rounded-lg text-gray-100 cursor-pointer"
+              href="/posts/like/<%= post._id %>"
+            >
+              <i class="fas fa-thumbs-up"></i> <%= post.likes.indexOf(user._id)
+              ? "Like" : "UnLike" %>
+            </a>
+            <a
+              class="bg-[#662e9b] text-gray-200 font-bold py-2 px-4 rounded-lg"
+              href="/posts/edit/<%= post._id %>"
+            >
+              Edit
+            </a>
+          </div>
+        </div>
+        <% }) %>
+        <!-- Post Card -->
+      </div>
+    </div>
+  </body>
+</html>
