@@ -23,5 +23,8 @@ postRouter
 postRouter
   .route("/edit/:id")
   .get(userController.isLoggedIn, postController.editPost);
+postRouter
+  .route("/update/:id")
+  .post(userController.isLoggedIn, postController.updatePost);
 
 module.exports = postRouter;

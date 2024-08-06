@@ -43,3 +43,13 @@ exports.editPost = async (req, res) => {
   const post = await Post.findById(req.params.id);
   res.render("edit", { post });
 };
+
+exports.updatePost = async (req, res) => {
+  // DO not use findOneByIdAndUpdate, use instead below method
+  const post = await Post.findById(req.params.id);
+  console.log(post._id);
+  post.postData = req.body.postData;
+  post.content = req.body.content;
+  await post.save();
+  res.redirect("/users/profile");
+};
