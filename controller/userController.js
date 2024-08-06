@@ -73,10 +73,11 @@ exports.login = async (req, res, next) => {
     }
   );
   res.cookie("token", token);
-  res.status(200).json({
-    status: "success",
-    token,
-  });
+  // res.status(200).json({
+  //   status: "success",
+  //   token,
+  // });
+  res.redirect("/users/profile");
 };
 
 exports.isLoggedIn = (req, res, next) => {
@@ -92,4 +93,16 @@ exports.isLoggedIn = (req, res, next) => {
 exports.profile = async (req, res, next) => {
   let user = await User.findOne({ email: req.user.email }).populate("posts");
   await res.render("profile", { user });
+};
+
+exports.upload = (req, res) => {
+  res.render("upload");
+};
+exports.uploadImage = async (req, res) => {
+  console.log(req.file);
+  const user = await User.findOne({ id: req.body.id });
+  user.profile = req.file.filename;
+  await user.save();
+  res.redirect("/users/profile");
+  console.log(user, req.file.filename);
 };

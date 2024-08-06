@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
       ref: "post",
     },
   ],
+  profile: {
+    type: String,
+    default: "default.png",
+  },
 });
 
 userSchema.pre("save", async function (next) {

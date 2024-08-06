@@ -16,7 +16,7 @@
 
       <a href="/users/logout"
         ><button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg float-right"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg mt-10 float-right"
         >
           Log Out
         </button></a
@@ -27,6 +27,22 @@
         action="/posts"
         method="POST"
       >
+        <div class="mt-10 flex justify-start items-center gap-4">
+          <div class="h-20 w-20 bg-red-500 rounded-full">
+            <img
+              src="/uploads/<%= user.profile %>"
+              alt="User"
+              class="w-full h-full object-cover rounded-full"
+            />
+          </div>
+
+          <div class="text-white font-bold text-xl">Hello <%= user.name %></div>
+          <a
+            href="/users/upload"
+            class="text-white bg-red-500 px-4 py-2 rounded-xl"
+            >Upload Image</a
+          >
+        </div>
         <h1 class="text-white font-bold text-center p-10">Create Post</h1>
         <input
           type="text"

@@ -26,5 +26,7 @@ postRouter
 postRouter
   .route("/update/:id")
   .post(userController.isLoggedIn, postController.updatePost);
-
+postRouter
+  .route("/upload")
+  .post(userController.isLoggedIn, postController.uploadFile);
 module.exports = postRouter;

@@ -25,7 +25,6 @@ exports.createPost = async (req, res) => {
   await user.save();
   res.redirect("/users/profile");
 };
-
 // Like Post
 exports.likePost = async (req, res) => {
   const post = await Post.findById(req.params.id);
@@ -38,12 +37,10 @@ exports.likePost = async (req, res) => {
   // console.log(req.user);
   res.redirect("/users/profile");
 };
-
 exports.editPost = async (req, res) => {
   const post = await Post.findById(req.params.id);
   res.render("edit", { post });
 };
-
 exports.updatePost = async (req, res) => {
   // DO not use findOneByIdAndUpdate, use instead below method
   const post = await Post.findById(req.params.id);
@@ -52,4 +49,8 @@ exports.updatePost = async (req, res) => {
   post.content = req.body.content;
   await post.save();
   res.redirect("/users/profile");
+};
+exports.uploadFile = (req, res) => {
+  console.log(req.file);
+  res.send("Hello");
 };
